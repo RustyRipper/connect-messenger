@@ -1,0 +1,2 @@
+### >>> <i>CONNECT</i> messenger
+Just a small project, which helped me learn React. Created with create-react-app. [See this in action](https://filip1159.github.io/connect-messenger-react). (Or not, since backend hasn't been deployed yet.) [Server side app](https://github.com/Filip1159/connect-messenger-java) written using Java and Spring Boot, waiting for its deploy ;)

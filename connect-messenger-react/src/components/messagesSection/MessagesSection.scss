@@ -1,0 +1,49 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.messages {
+    background: $backgroundColor;
+    @include setFlex(column, 1, flex-end);
+    height: calc(100vh - 65px);
+    max-width: calc(100vw - 851px);
+
+    @media (max-width: 1400px) {
+        max-width: calc(100vw - 441px);
+    }
+
+    @media (max-width: 1000px) {
+        max-width: calc(100vw - 111px);
+    }
+
+    &__container {
+        @include setFlex();
+        @include fancyScrollbar(right);
+        overflow-y: auto;
+
+        &__displayContent {
+            @include setFlex(column);    /* make singleMessages fit their content */
+            width: 100%;
+            max-width: calc(100vw - 891px);
+            padding-right: 30px;
+            overflow-y: visible;
+
+            @media (max-width: 1400px) {
+                max-width: calc(100vw - 481px);
+            }
+
+            @media (max-width: 1000px) {
+                max-width: calc(100vw - 171px);
+                padding-right: 16px;
+            }
+        }
+    }
+}
+
+.noMessages {
+    color: $secondaryTextColor;
+    font-size: $messageTextSize;
+    margin-top: 26px;
+    display: flex;
+    flex: 1;
+    align-self: center;
+}

@@ -1,0 +1,64 @@
+stages:
+  # - build
+  # - test
+  - Build_Deploy
+  - Send
+
+
+# build:
+#   stage: build
+#   image: node
+#   script: 
+#     - echo "Start building App"
+#     - npm install
+#     - npm build
+#     - echo "Build successfully!"
+#   artifacts:
+#     expire_in: 1 hour
+#     paths:
+#       - build
+#       - node_modules/
+
+# test:
+#   stage: test
+#   image: node
+#   script:
+#     - echo "Testing App"
+#     - CI=true npm test
+#     - echo "Test successfully!"
+
+docker_image:
+  image: docker:stable
+  stage: Build_Deploy
+  variables:
+    IMAGE_NAME: fwfw541111/connect-messenger-react
+    IMAGE_TAG: app-1.0
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - docker:dind
+  before_script:
+    - apk update && apk add git
+    - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin
+  script:
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+
+find-docker-port:
+  image: alpine
+  stage: Build_Deploy
+  services:
+    - docker:dind
+  script:
+    - apk add nmap
+    - nmap -sT -p- docker
+
+send_to_server:
+  image: docker:stable
+  stage: Send
+  needs:
+    - docker_image
+    - find-docker-port
+  before_script:
+    - apk add --update curl && rm -rf /var/cache/apk/*
+  script:
+    - "curl -X POST --fail -F token=glptt-5ee67087dcbc002483741ce4177dee07308351b5 -F ref=main https://gitlab.com/api/v4/projects/45993400/trigger/pipeline"

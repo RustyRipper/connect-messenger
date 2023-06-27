@@ -1,0 +1,44 @@
+version: '3.3'
+
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: connectmessenger
+    networks:
+      springboot-mysql-react-net:
+    volumes:
+      - connect-messenger-java_connectmessenger:/var/lib/mysql
+
+  springboot:
+    container_name: springboot
+    image: rustyripper/connect-messenger-java3
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqldb
+    networks:
+      springboot-mysql-react-net:
+    restart: on-failure
+
+  react:
+    restart: always
+    container_name: react
+    image: fwfw541111/connect-messenger-react:app-1.0
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    networks:
+      springboot-mysql-react-net:
+    depends_on:
+      - springboot
+
+networks:
+  springboot-mysql-react-net:
+
+volumes:
+  connect-messenger-java_connectmessenger:
+    external: true
