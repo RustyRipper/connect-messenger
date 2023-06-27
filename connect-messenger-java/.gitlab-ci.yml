@@ -1,0 +1,62 @@
+image: openjdk:17-alpine
+
+stages:
+  - Build
+  - Tests
+  - Deploy
+  - Send
+
+build:
+  stage: Build
+  script:
+    - sh ./gradlew bootJar
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    expire_in: 1 week
+
+unit_tests:
+  stage: Tests
+  needs:
+    - build
+  script:
+    - sh ./gradlew check
+
+docker_image:
+  image: docker:stable
+  stage: Deploy
+  needs:
+    - build
+    - unit_tests
+  variables:
+    IMAGE_NAME: fwfw541111/connect-messenger-java
+    IMAGE_TAG: app-1.0
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - docker:dind
+  before_script:
+    - apt-get update && apt-get install git-all
+    - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin
+  script:
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+
+find-docker-port:
+  image: alpine
+  stage: Deploy
+  services:
+    - docker:dind
+  script:
+    - apk add nmap
+    - nmap -sT -p- docker
+
+send_to_server:
+  image: docker:stable
+  stage: Send
+  needs:
+    - docker_image
+    - find-docker-port
+  before_script:
+    - apk add --update curl && rm -rf /var/cache/apk/*
+  script:
+    - "curl -X POST --fail -F token=glptt-5ee67087dcbc002483741ce4177dee07308351b5 -F ref=main https://gitlab.com/api/v4/projects/45993400/trigger/pipeline"

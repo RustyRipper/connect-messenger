@@ -1,0 +1,57 @@
+{
+  "name": "react-spring-chat-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "1.2.36",
+    "@fortawesome/free-solid-svg-icons": "6.4.0",
+    "@fortawesome/react-fontawesome": "0.1.15",
+    "@lexical/code": "0.10.0",
+    "@lexical/html": "0.10.0",
+    "@lexical/link": "0.10.0",
+    "@lexical/list": "0.10.0",
+    "@lexical/markdown": "0.10.0",
+    "@lexical/react": "0.10.0",
+    "@lexical/rich-text": "0.10.0",
+    "@lexical/selection": "0.10.0",
+    "@lexical/table": "0.10.0",
+    "@lexical/utils": "0.10.0",
+    "@stomp/stompjs": "7.0.0",
+    "@testing-library/jest-dom": "5.14.1",
+    "@testing-library/react": "11.2.7",
+    "@testing-library/user-event": "12.8.3",
+    "axios": "1.4.0",
+    "jwt-decode": "3.1.2",
+    "lexical": "0.10.0",
+    "node-sass": "8.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "6.11.0",
+    "react-scripts": "5.0.1",
+    "sockjs": "0.3.24"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

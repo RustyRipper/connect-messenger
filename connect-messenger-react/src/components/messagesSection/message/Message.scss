@@ -1,0 +1,197 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.singleMessage {
+	$self: &;
+	position: relative;
+	border-radius: 20px;
+	letter-spacing: 1px;
+	padding: 10px 20px;
+	margin: 10px;
+	max-width: 60%;
+	font-size: $messageTextSize;
+	font-weight: 400;
+	cursor: default;
+	overflow-wrap: break-word;
+
+	@media (max-width: 576px) {
+		font-size: $smallMessageTextSize;
+		padding: 5px 10px;
+		border-radius: 10px;
+	}
+
+	&:hover > .singleMessage__tooltip {
+		opacity: 100%;
+		transition: opacity $transitionTime linear 1s; /* property duration type delay */
+	}
+
+	&:hover > .singleMessage__reaction--expandable {
+		display: flex;
+	}
+
+	&__reaction {
+		display: none;
+		align-items: center;
+		justify-content: center;
+        gap: 5px;
+        padding: 1px 5px;
+		background: $backgroundColor;
+		width: 18px;
+		height: 18px;
+		border-radius: 4px;
+		position: absolute;
+		bottom: -10px;
+		left: 10px;
+		z-index: 10;
+
+		&--alwaysVisible {
+			display: flex;
+		}
+
+		&--expanded {
+			display: flex;
+			flex-direction: row;
+			width: auto;
+		}
+
+		&--hoverable {
+			cursor: pointer;
+
+			svg {
+				transition: .1s;
+
+				&:hover {
+					transform: scale(1.2);
+				}
+			}
+		}
+	}
+
+	&__tooltip {
+		background: $tooltipBackgroundColor;
+		font-size: $tooltipTextSize;
+		position: absolute;
+		top: 10px;
+		border-radius: 5px;
+		padding: 8px;
+		opacity: 0;
+		z-index: 100;
+
+		@media (max-width: 576px) {
+			display: none;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 8px;
+			border-width: 5px;
+			border-style: solid;
+		}
+	}
+
+	&__img {
+		max-width: 100%;
+		max-height: 30vh;
+		border-radius: inherit;
+	}
+
+	&--img {
+		padding: 0;
+		background-color: #282c34 !important;
+	}
+
+	&--file {
+		background-color: black !important;
+		color: white !important;
+		cursor: pointer;
+		padding: 0;
+
+		&__link {
+			padding: 10px 20px;
+			color: white;
+			text-decoration: none;
+			display: block;
+		}
+
+		&__icon {
+			padding-right: 8px;
+		}
+	}
+
+	&--receivedMsg {
+		background: $secondaryColor;
+		margin-left: 10px;
+		margin-right: auto;
+		color: $whiteTextColor;
+
+		#{ $self }__tooltip {
+			left: calc(100% + 10px);
+
+			&::after {
+				right: 100%;
+				border-color: transparent $tooltipBackgroundColor transparent transparent;
+			}
+		}
+	}
+
+	&--receivedMsg#{&}--topSticky {
+		margin-top: 1px;
+		border-top-left-radius: 0;
+	}
+
+	&--receivedMsg#{&}--bottomSticky {
+		margin-bottom: 1px;
+		border-bottom-left-radius: 0;
+	}
+
+	&--myMsg {
+		background: $primaryColor;
+		margin-right: 10px;
+		margin-left: auto;
+		color: $blackTextColor;
+
+		#{ $self }__tooltip {
+			right: calc(100% + 10px);
+
+			&::after {
+				left: 100%;
+				border-color: transparent transparent transparent $tooltipBackgroundColor;
+			}
+		}
+	}
+
+	&--myMsg#{&}--topSticky {
+		margin-top: 1px;
+		border-top-right-radius: 0;
+	}
+
+	&--myMsg#{&}--bottomSticky {
+		margin-bottom: 1px;
+		border-bottom-right-radius: 0;
+	}
+
+	&__time {
+		font-size: $timeTextSize;
+		text-align: center;
+		color: $primaryColor;
+		margin-top: 15px;
+
+		@media (max-width: 576px) {
+			font-size: $smallTimeTextSize;
+		}
+	}
+
+	.editor-code {
+		min-width: 150px;
+		overflow-wrap: inherit;
+	}
+
+	.editor-paragraph {
+		overflow-wrap: inherit;
+
+		span {
+			overflow-wrap: inherit;
+		}
+	}
+}
