@@ -15,7 +15,9 @@ services:
 
   springboot:
     container_name: springboot
-    image: rustyripper/connect-messenger-java3
+    build:
+        context: ../connect-messenger-java
+        dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
@@ -27,7 +29,9 @@ services:
   react:
     restart: always
     container_name: react
-    image: fwfw541111/connect-messenger-react:app-1.0
+    build:
+      context: ../connect-messenger-react
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     stdin_open: true
