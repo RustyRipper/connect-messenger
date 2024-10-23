@@ -53,11 +53,11 @@ public class UserService implements UserDetailsService {
         if (existUser.isEmpty()) {
             User newUser = new User();
             newUser.setUsername(username);
-            newUser.setSurname("google");
+            newUser.setSurname("cognito");
             newUser.setName(username);
             newUser.setPassword("{bcrypt}" + BCrypt.hashpw("ziomo", BCrypt.gensalt()));
 
-            newUser.setProvider(Provider.GOOGLE);
+            newUser.setProvider(Provider.COGNITO);
             userRepo.save(newUser);
             return newUser;
         }

@@ -34,9 +34,23 @@ class ChatAPI {
         }
     }
 
-    static async signInWithGoogle() {
+    // static async signInWithGoogle() {
+    //     try {
+    //         const res = await api.get("/oauth2/authorization/google")
+    //         if (res.status === 200) {
+    //             const token = res.headers.authentication;
+    //             localStorage.setItem("token", token);
+    //             this.authDetails = jwt_decode(token);
+    //             return true;
+    //         }
+    //     } catch (e) {
+    //         return false;
+    //     }
+    // }
+
+    static async signInWithCognito() {
         try {
-            const res = await api.get("/oauth2/authorization/google")
+            const res = await api.get("/oauth2/authorization/cognito")
             if (res.status === 200) {
                 const token = res.headers.authentication;
                 localStorage.setItem("token", token);

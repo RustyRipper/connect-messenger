@@ -47,7 +47,7 @@ public class SecurityConfig2 {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable().authorizeHttpRequests()
-                .requestMatchers("/google", "/oauth2/authorization/google","/login", "/websocket/**",
+                .requestMatchers("/google", "/cognito", "/oauth2/authorization/google", "/oauth2/authorization/cognito","/login", "/websocket/**",
      "/swagger-ui.html", "/v2/api-docs",
                         "/swagger-resources/**", "/images/**", "/test-s3")
                 .permitAll() // tell spring not to require login to access those endpoints
@@ -90,7 +90,7 @@ public class SecurityConfig2 {
                             response.addHeader("Authentication", "Bearer " + token);
 
                             //dont work :/
-                            response.sendRedirect("http://3.71.114.74:3000/google/"+ "Bearer " + token );
+                            response.sendRedirect("http://3.71.114.74:3000/cognito/"+ "Bearer " + token );
                         }
 
                     }
