@@ -1,0 +1,8 @@
+• Autentykację oraz autoryzację z wykorzystaniem AWS Cognito.
+• Integrację z relacyjną bazą danych (Amazon RDS).
+5. Skonfiguruj VPC (Virtual Private Cloud) i ustal odpowiednie reguły bezpieczeństwa.
+6. Wdróż aplikację z wykorzystaniem EC2 oraz interfejsu webowego AWS.
+7. Wdróż aplikację z wykorzystaniem EC2 oraz Terraform.
+
+
+8. Opisz cały proces wdrożenia w formie instrukcji.

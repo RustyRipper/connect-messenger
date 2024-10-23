@@ -59,7 +59,8 @@ const App = () => {
             <Routes>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/sign-up" element={<SignUpPage/>}/>
-                <Route path="/google/:token" element={<RedirectComponent />} />
+                {/*<Route path="/google/:token" element={<RedirectComponent />} />*/}
+                <Route path="/cognito/:token" element={<RedirectComponent />} />
                 <Route exact path="/" element={<ProtectedRoute>
                     <div className="app__container">
                         <ChatsSection/>

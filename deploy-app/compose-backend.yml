@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  springboot:
+    container_name: springboot
+    image: rustyripper/connect-messenger-java4
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://terraform-20241111110009996200000002.c3u7pg5zqr6k.us-east-1.rds.amazonaws.com:3306/connectmessenger
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+      APP_URL: 54.89.137.37.nip.io
+      FRONT_URL: 44.211.182.63.nip.io
+      COGNITO_CLIENT_ID:
+      COGNITO_CLIENT_SECRET:
+      COGNITO_SCOPE: openid,email
+      COGNITO_CLIENT_NAME: my_app_client_terraform
+      COGNITO_ISSUER_URI:
+    restart: on-failure

@@ -4,7 +4,7 @@ import {Stomp} from "@stomp/stompjs";
 import {nowToSql} from "../dateFormatter";
 import axios from "axios";
 
-export const baseURL = `http://${window.location.hostname}:8080`
+export const baseURL = `http://${window.env.API_URL}:8080`
 const api = axios.create({baseURL});
 
 class ChatAPI {
@@ -34,9 +34,23 @@ class ChatAPI {
         }
     }
 
-    static async signInWithGoogle() {
+    // static async signInWithGoogle() {
+    //     try {
+    //         const res = await api.get("/oauth2/authorization/google")
+    //         if (res.status === 200) {
+    //             const token = res.headers.authentication;
+    //             localStorage.setItem("token", token);
+    //             this.authDetails = jwt_decode(token);
+    //             return true;
+    //         }
+    //     } catch (e) {
+    //         return false;
+    //     }
+    // }
+
+    static async signInWithCognito() {
         try {
-            const res = await api.get("/oauth2/authorization/google")
+            const res = await api.get("/oauth2/authorization/cognito")
             if (res.status === 200) {
                 const token = res.headers.authentication;
                 localStorage.setItem("token", token);
